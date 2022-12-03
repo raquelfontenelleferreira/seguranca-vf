@@ -39,12 +39,13 @@ class BlockChain:
  
         self.chain.append(new_block)
  
-    def solve_challenge(self, block_hash): 
+    def solve_challenge(self, block_hash, challenge): 
         # encontrar um x tal que hash(x+block_hash) < challenge
         x = 0
         challenge = self.next_block_challenge()
         block_hash = self.update_hash()
-        while not (block_hash + x) < challenge:
+        block_hash_plus_x = (block_hash + x).hash
+        while not block_hash_plus_x < challenge:
             x += 1
             block_hash = self.update_hash()   
         return print(x)
